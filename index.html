@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 350px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        input[type="number"],
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            outline: none;
+        }
+        input[type="number"]:focus,
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #5f63f2;
+        }
+        button {
+            background-color: #5f63f2;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #4a51c6;
+        }
+        button:active {
+            background-color: #353b97;
+        }
+        textarea {
+            height: 120px;
+            resize: none;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .buttons-container button {
+            width: 48%;
+        }
+        .alert {
+            color: #5f63f2;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Please fill this input and generate multiple texts according to your input</p>
+        <input type="number" id="numberInput" placeholder="Enter a number" />
+        <input type="text" id="textInput" placeholder="Enter text" />
+        <button onclick="generateText()">Send</button>
+        <textarea id="outputArea" readonly placeholder="Generated text will appear here..."></textarea>
+        <div class="buttons-container">
+            <button onclick="copyText()">Copy</button>
+            <button onclick="deleteText()">Delete</button>
+        </div>
+        <div class="alert" id="copyAlert" style="display:none;">Text copied to clipboard!</div>
+    </div>
+
+    <script>
+        function generateText() {
+            const numberInput = document.getElementById("numberInput").value;
+            const textInput = document.getElementById("textInput").value;
+            const outputArea = document.getElementById("outputArea");
+            
+            let result = "";
+            for (let i = 0; i < numberInput; i++) {
+                result += textInput + "\n";
+            }
+            outputArea.value = result.trim(); // Remove extra newline at the end
+        }
+
+        function copyText() {
+            const outputArea = document.getElementById("outputArea");
+            outputArea.select();
+            document.execCommand("copy");
+            const copyAlert = document.getElementById("copyAlert");
+            copyAlert.style.display = "block"; // Show the copy alert
+            setTimeout(() => {
+                copyAlert.style.display = "none"; // Hide the alert after 2 seconds
+            }, 2000);
+        }
+
+        function deleteText() {
+            const outputArea = document.getElementById("outputArea");
+            outputArea.value = ""; // Clears the textarea
+        }
+    </script>
+</body>
+</html>
