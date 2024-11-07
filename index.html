@@ -75,6 +75,7 @@
         .buttons-container {
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
         .buttons-container button {
             width: 48%;
@@ -83,6 +84,22 @@
             color: #5f63f2;
             margin-top: 10px;
             font-size: 14px;
+        }
+        /* Media Queries for Responsiveness */
+        @media (max-width: 500px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+            p {
+                font-size: 14px;
+            }
+            textarea {
+                height: 100px;
+            }
+            button {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
